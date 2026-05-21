@@ -1,2 +1,2 @@
 # silver-share-frontend
-This repo contains the frontend part of Silver Share application
+This repo contains the frontend part of Silver Share application. **Work In Progress**
