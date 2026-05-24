@@ -61,9 +61,7 @@ async function calculateCheckSum(file){
 }
 
 function uint8ToHex(uint8) {
-  return [...uint8]
-    .map(b => b.toString(16).padStart(2, "0"))
-    .join("");
+  return [...uint8].map(b => b.toString(16).padStart(2, "0")).join("");
 }
 
 function generateIV(){
