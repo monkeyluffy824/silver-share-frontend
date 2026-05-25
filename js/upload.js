@@ -1,5 +1,5 @@
 import { BASE_URI,CHUNK_SIZE } from "./constants";
-import { encryptedChunk } from "./crypto";
+import { calculateCheckSum, encryptedChunk } from "./crypto";
 const MAX_FILE_SIZE =200*1024*1024;
 const MAX_TOTAL_FILES = 5;
 
@@ -52,5 +52,33 @@ function fileSizeValidator(file){
     }
 
     return true;
+}
+
+function createFileRequestBody(file){
+    const json={};
+    json["file_name"] = file.name;
+    json["file_size"] = file.size;
+    json["check_sum"] = calculateCheckSum(file);
+    json["total_chunks"] = totalChunksFunc(file);
+
+    return json;
+}
+
+function totalChunksFunc(file){
+    return Math.round(file.size/CHUNK_SIZE);
+}
+
+function createTransferRequestBody(files,title,message,expiryCount){
+    const transJson ={};
+    transJson["title"] = title ? title : null;
+    transJson["message"] = message ? message : null;
+    const items =[];
+    files?.forEach(file => {
+        items.append(createFileRequestBody(file));
+    });
+    transJson["files"] = items;
+    transJson["expiryCount"] = expiryCount;
+
+    return transJson;
 }
 
