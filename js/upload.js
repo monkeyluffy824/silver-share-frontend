@@ -110,9 +110,9 @@ async function mainUploadFlow(){
             const iniFileRequestBody = createFileRequestBody(file);
             const etgs =[];
             if(state.filePreSignedUrls[Object.keys()[i]].length === 1 && file.size < FILE_TYPE_LIMIT){
-                etgs = await uploadSingleFile(file,state.cryptoKey,state.filePreSignedUrls[Object.keys()[i]][0]);
+                etgs = await uploadSingleFile(file,state.cryptoKey,state.filePreSignedUrls[Object.keys()[i]]["presigned_urls"][0]);
             }else{
-                etgs = await multipartUpload(file,state.cryptoKey,state.filePreSignedUrls[Object.keys()[i]]);
+                etgs = await multipartUpload(file,state.cryptoKey,state.filePreSignedUrls[Object.keys()[i]]["presigned_urls"]);
             }
             completeFileBody(etgs,Object.keys()[i],filesJson);
         }
