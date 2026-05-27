@@ -139,7 +139,7 @@ async function initiateTransfer(){
             throw Error("Error ocurred in creating Transfer");
         }
     } catch (error) {
-        console.log(error);
+        throw Error(error);
     }
 }
 
@@ -152,7 +152,7 @@ async function completeTransfer(comJson){
             throw Error("Error Occured in completing Transfer");
         }
     }catch(error){
-        console.log(error)
+        throw Error(error);
     }
 }
 
